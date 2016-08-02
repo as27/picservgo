@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"path"
+	"path/filepath"
 
 	"github.com/gorilla/mux"
 )
@@ -13,7 +15,8 @@ import (
 func GETFolderElements(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	folderPath := vars["folder"]
-	files, err := ioutil.ReadDir(folderPath)
+	localPath := filepath.ToSlash(path.Join(Conf.GalleryRoot, folderPath))
+	files, err := ioutil.ReadDir(localPath)
 	if err != nil {
 		log.Println(err)
 	}

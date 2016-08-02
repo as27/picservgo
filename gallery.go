@@ -26,11 +26,12 @@ type Imaginary struct {
 func (i *Imaginary) FullSizeURL(fp string) string {
 	fp = filepath.ToSlash(fp)
 	u, err := url.Parse(i.URL)
-	q := u.Query()
-	q.Set("file", fp)
 	if err != nil {
 		log.Println(err)
 	}
+	q := u.Query()
+	q.Set("file", fp)
+	u.RawQuery = q.Encode()
 	return u.String()
 }
 
@@ -38,12 +39,13 @@ func (i *Imaginary) FullSizeURL(fp string) string {
 func (i *Imaginary) ThumbURL(fp string) string {
 	fp = filepath.ToSlash(fp)
 	u, err := url.Parse(i.URL + "/" + i.ThumbMethod)
+	if err != nil {
+		log.Println(err)
+	}
 	q := u.Query()
 	q.Set("file", fp)
 	q.Set("width", i.ThumbWidth)
 	q.Set("height", i.ThumbHeight)
-	if err != nil {
-		log.Println(err)
-	}
+	u.RawQuery = q.Encode()
 	return u.String()
 }

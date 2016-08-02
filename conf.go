@@ -8,14 +8,16 @@ import (
 )
 
 // ConfFile is the path to the configuration file
-var ConfFile = "conf.yaml"
+var ConfFile = "picservgo.yaml"
 
 // Conf stores the configuration
 var Conf Options
 
 // Options is the structure of the config file
 type Options struct {
-	Imaginary Imaginary `yaml:"Imaginary"`
+	ServerPort  string    `yaml:"ServerPort"`
+	GalleryRoot string    `yaml:"GalleryRoot"`
+	Imaginary   Imaginary `yaml:"Imaginary"`
 }
 
 type dependencies struct{}

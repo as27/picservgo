@@ -7,18 +7,30 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var ServerPort = ":4527"
+var ServerPort string
 
-var MyGallery = Imaginary{
-	URL:         Conf.Imaginary.URL,
-	ThumbWidth:  Conf.Imaginary.ThumbWidth,
-	ThumbHeight: Conf.Imaginary.ThumbHeight,
-	ThumbMethod: Conf.Imaginary.ThumbMethod,
+var GalleryRootFolder string
+
+var MyGallery = Imaginary{}
+
+func init() {
+	LoadConf()
+
+	ServerPort = Conf.ServerPort
+
+	GalleryRootFolder = Conf.GalleryRoot
+
+	MyGallery = Imaginary{
+		URL:         Conf.Imaginary.URL,
+		ThumbWidth:  Conf.Imaginary.ThumbWidth,
+		ThumbHeight: Conf.Imaginary.ThumbHeight,
+		ThumbMethod: Conf.Imaginary.ThumbMethod,
+	}
 }
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc(`/folder/{folder}`, GETFolderElements).Methods("GET")
+	router.HandleFunc(`/folder/{folder:.*}`, GETFolderElements).Methods("GET")
 	//log.Println("Starting server at port " + Conf.ServerPort)
 	log.Fatal(http.ListenAndServe(ServerPort, router))
 }
