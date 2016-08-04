@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io/ioutil"
 	"log"
 
@@ -8,7 +9,7 @@ import (
 )
 
 // ConfFile is the path to the configuration file
-var ConfFile = "picservgo.yaml"
+var ConfFile = flag.String("conf", "picservgo.yaml", "Path to the conf (yaml) file")
 
 // Conf stores the configuration
 var Conf Options
@@ -21,6 +22,10 @@ type Options struct {
 }
 
 type dependencies struct{}
+
+func init() {
+	flag.Parse()
+}
 
 func LoadConf() {
 	b, err := ioutil.ReadFile(ConfFile)

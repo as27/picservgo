@@ -13,6 +13,7 @@ import (
 
 // GETFolderElements returns the folder content.
 func GETFolderElements(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	vars := mux.Vars(r)
 	folderPath := vars["folder"]
 	localPath := filepath.ToSlash(path.Join(Conf.GalleryRoot, folderPath))
