@@ -28,7 +28,7 @@ func init() {
 }
 
 func LoadConf() {
-	b, err := ioutil.ReadFile(ConfFile)
+	b, err := ioutil.ReadFile(*ConfFile)
 	if err != nil {
 		log.Fatal(err)
 	}
