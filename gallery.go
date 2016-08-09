@@ -25,7 +25,7 @@ type Imaginary struct {
 // FullSizeURL returns the url for the full size image
 func (i *Imaginary) FullSizeURL(fp string) string {
 	fp = filepath.ToSlash(fp)
-	u, err := url.Parse(i.URL)
+	u, err := url.Parse(i.URL + "/fullsize")
 	if err != nil {
 		log.Println(err)
 	}
