@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"path"
+	"strings"
 )
 
 // FolderContent represents the content of a folder
@@ -48,7 +49,7 @@ var PicSuffixes = []string{
 }
 
 func hasPicSuffix(name string) bool {
-	ext := path.Ext(name)
+	ext := strings.ToLower(path.Ext(name))
 	for _, ps := range PicSuffixes {
 		if ps == ext {
 			return true

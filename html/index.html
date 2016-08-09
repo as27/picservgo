@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Gallery</title>
+
+
+ <script src="vue.js" type="text/javascript" charset="utf-8">
+    </script>
+
+</head>
+<body>
+  <div id="mygallery">
+    
+ <div id="app">
+
+<a v-for="folder in folder.folders" v-bind:href=folder>
+        {{folder}}
+</a>
+    <a v-for="pic in folder.images" href="{{pic.href}}">
+        <img v-bind:src=pic.thumbnail />
+    </a>
+
+</div>
+</div>
+
+<script src="vue.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="app.js" type="text/javascript" charset="utf-8">
+    </script>
+</body>
+</html>
