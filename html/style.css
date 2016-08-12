@@ -1,0 +1,13 @@
+
+div.folder a{
+
+    float: left;
+    margin: 5px;
+    color: #444;
+    text-align: center;
+    text-decoration: none
+}
+
+div.folder a:hover{
+    color: #888;
+}
