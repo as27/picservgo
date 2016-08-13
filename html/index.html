@@ -14,16 +14,26 @@
   <div id="mygallery">
     
  <div id="app">
+     <h1>{{path}}</h1>
+     <div id="foldernav">
+     <div class="icon">
+      <a v-on:click="levelUp()">
+        <i class="fa fa-arrow-up fa-5x" aria-hidden="true"></i>
+      </a>
+     </div>
 
-<div class="folder" v-for="f in content.folders">
-   <a v-on:click="openFolder({{f}})">
+<div class="icon" v-for="f in content.folders">
+   <a v-on:click="openFolder(f)">
     <i class="fa fa-folder-o fa-5x" aria-hidden="true"></i><br>
 {{f}}
    </a>
-</div><br>
+</div>
+     </div>
+     <div id="pics">
     <a v-for="pic in content.images" href="{{pic.href}}">
         <img v-bind:src=pic.thumbnail />
     </a>
+     </div>
 </div>
 </div>
 

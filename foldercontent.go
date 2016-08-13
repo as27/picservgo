@@ -49,9 +49,9 @@ var PicSuffixes = []string{
 }
 
 func hasPicSuffix(name string) bool {
-	ext := strings.ToLower(path.Ext(name))
+	ext := path.Ext(name)
 	for _, ps := range PicSuffixes {
-		if ps == ext {
+		if strings.EqualFold(ps, ext) {
 			return true
 		}
 	}

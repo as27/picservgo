@@ -1,17 +1,27 @@
-var serverURL = "http://raspi.fritz.box:4558/folder/2016"
+var serverURL = "http://raspi.fritz.box:4558/folder/"
 
 new Vue({
   el: '#app',
   data: {
     path: "",
-    content: null
+    content: null,
+    breadcrumps: []
   },
   created: function () {
     this.fetchData()
   },
   methods: {
     openFolder: function(f){
-      this.path = this.path + "/" + f
+      this.breadcrumps.push(this.path)
+      if (this.path == ""){
+        this.path = this.path + f
+      }else{
+        this.path = this.path + "/" + f
+      }
+      this.fetchData()
+    },
+    levelUp: function(){
+      this.path = this.breadcrumps.pop()
       this.fetchData()
     },
     fetchData: function () {
