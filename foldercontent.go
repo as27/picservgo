@@ -6,6 +6,9 @@ import (
 	"strings"
 )
 
+// TimestampLayout defines the timestamps
+const TimestampLayout string = "20060102150405"
+
 // FolderContent represents the content of a folder
 type FolderContent struct {
 	FolderPath string         `json:"path"`    //The path to the folder
@@ -29,12 +32,15 @@ func (fc *FolderContent) Add(fi os.FileInfo) {
 	}
 	if hasPicSuffix(fi.Name()) {
 		fpath := path.Join(fc.FolderPath, fi.Name())
+		lastMod := fi.ModTime()
 		img := BlueimpImage{
-			Title: fi.Name(),
-			Href:  fc.Gallery.FullSizeURL(fpath),
-			Type:  "image/jpeg",
-			Thumb: fc.Gallery.ThumbURL(fpath),
+			Title:     fi.Name(),
+			Href:      fc.Gallery.FullSizeURL(fpath),
+			Type:      "image/jpeg",
+			Thumb:     fc.Gallery.ThumbURL(fpath),
+			Timestamp: lastMod.Format(TimestampLayout),
 		}
+
 		fc.Images = append(fc.Images, img)
 	}
 
@@ -61,10 +67,11 @@ func hasPicSuffix(name string) bool {
 // BlueimpImage is the implementation for the Blueimp Gallery
 // https://blueimp.github.io/Gallery/
 type BlueimpImage struct {
-	Title string `json:"title"`
-	Href  string `json:"href"`
-	Type  string `json:"type"`
-	Thumb string `json:"thumbnail"`
+	Title     string `json:"title"`
+	Href      string `json:"href"`
+	Type      string `json:"type"`
+	Thumb     string `json:"thumbnail"`
+	Timestamp string `json:"timestamp"`
 }
 
 // MarshalJSON is the implementation of the json.Marshaler interface
