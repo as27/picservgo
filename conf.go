@@ -18,6 +18,7 @@ var Conf Options
 type Options struct {
 	ServerPort  string    `yaml:"ServerPort"`
 	GalleryRoot string    `yaml:"GalleryRoot"`
+	HtmlRoot    string    `yaml:"HtmlRoot"`
 	Imaginary   Imaginary `yaml:"Imaginary"`
 }
 
