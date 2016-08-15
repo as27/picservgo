@@ -30,7 +30,7 @@
 </div>
      </div>
      <div id="pics">
-    <a v-for="pic in content.images" href="{{pic.href}}">
+    <a v-for="pic in content.images | orderBy 'timestamp'" href="{{pic.href}}">
         <img v-bind:src=pic.thumbnail />
     </a>
      </div>

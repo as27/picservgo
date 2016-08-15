@@ -31,6 +31,8 @@ func init() {
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc(`/folder/{folder:.*}`, GETFolderElements).Methods("GET")
+	router.HandleFunc(`/static/.*`, GETStatic).Methods("GET")
+	router.PathPrefix(`/static/`).Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("html"))))
 	//log.Println("Starting server at port " + Conf.ServerPort)
 	log.Fatal(http.ListenAndServe(ServerPort, router))
 }
